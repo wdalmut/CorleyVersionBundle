@@ -1,0 +1,24 @@
+{
+    "name": "corley/version-bundle",
+    "type": "symfony-bundle",
+    "description": "Corley Version Bundle",
+    "keywords": ["version", "management", "symfony"],
+    "license": "MIT",
+    "autoload": {
+        "psr-0": {
+            "Corley\\VersionBundle": ""
+        }
+    },
+    "target-dir": "Corley/VersionBundle",
+    "require": {
+        "php": ">= 5.3.3",
+        "symfony/framework-bundle": "~2",
+        "symfony/security-bundle": "~2",
+        "symfony/console": "~2",
+        "symfony/dependency-injection": "~2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4",
+        "mikey179/vfsStream": "1.*"
+    }
+}
