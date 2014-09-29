@@ -34,11 +34,17 @@ class VersionCommandTest extends \PHPUnit_Framework_TestCase
         return $commandTester;
     }
 
+    /**
+     * @group functional
+     * @group command
+     */
     public function testBumpANewVersion()
     {
         $commandTester = $this->prepareCommand();
 
         $commandTester->execute(array("version" => "x.x.x"));
+
         $this->assertEquals('{ parameters: { version: { number: x.x.x } } }', file_get_contents(vfsStream::url('config/version.yml')));
+        $this->assertRegExp('/Bumped version: \'x.x.x\'/', $commandTester->getDisplay());
     }
 }
