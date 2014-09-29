@@ -5,7 +5,15 @@
 
 Just an unified way in order to bump app version for Symfony2 application
 
+```shell
+app/console corley:version 0.0.1
+```
+
+The bundle creates a new `version.yml` file in your `config` folder. That's it
+no big deal...
+
 In your `config/config.yml` add an import
+
 ```yml
 imports:
     - { resource: version.yml }
