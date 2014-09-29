@@ -5,7 +5,7 @@
 
 Just an unified way in order to bump app version for Symfony2 application
 
-In your `config/donfig.yml add an import
+In your `config/config.yml` add an import
 ```yml
 imports:
     - { resource: version.yml }
@@ -15,7 +15,7 @@ If you want to print it in your templates, just add the version in your twig
 configuration
 
 
-```yml
+```yaml
 # config/config.yml
 twig:
     globals:
@@ -43,12 +43,12 @@ You can also append the version number after your static resources
 {% endjavascripts %}
 ```
 
-in your git flow
+Or you can use it in your git flow release process
 
 ```shell
-git flow release start 1.0.0
-app/console corley:version 1.0.0
-git commit -a -m "Bumped version 1.0.0
-git flow release finish 1.0.0
+$ git flow release start 1.0.0
+$ app/console corley:version 1.0.0
+$ git commit -a -m "Bumped version 1.0.0
+$ git flow release finish 1.0.0
 ```
 
