@@ -2,8 +2,19 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="corley_version.yml.parser"
+            class="Symfony\Component\Yaml\Parser" />
+
+        <service id="corley_version.yml.dumper"
+            class="Symfony\Component\Yaml\Dumper" />
+
         <service id="corley_version.command.version_command"
             class="Corley\VersionBundle\Command\VersionCommand">
+            <argument type="service" id="corley_version.yml.parser" />
+            <argument type="service" id="corley_version.yml.dumper" />
+            <call method="setRootDir">
+                <argument>%kernel.root_dir%/config</argument>
+            </call>
             <tag name="console.command" />
         </service>
     </services>

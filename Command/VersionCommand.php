@@ -65,6 +65,9 @@ EOF
                 $output,
                 'Please indicate the final version [x.x.x]',
                 function ($version) {
+                    if (!$version) {
+                        throw new \InvalidArgumentException("You have to set a version number. Something like: '1.0.0'");
+                    }
                     return $version;
                 }
             );
