@@ -5,25 +5,27 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Dumper;
 
 class VersionCommand extends Command
 {
-    private $parser;
     private $dumper;
     private $rootDir;
 
-    public function __construct(Parser $parser, Dumper $dumper)
+    public function __construct(Dumper $dumper)
     {
         parent::__construct(null);
-        $this->parser = $parser;
         $this->dumper = $dumper;
     }
 
     public function setRootDir($rootDir)
     {
         $this->rootDir = $rootDir;
+    }
+
+    protected function getVersionFilePath()
+    {
+        return $this->rootDir . "/version.yml";
     }
 
     protected function configure()
@@ -45,12 +47,12 @@ EOF
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $version = $input->getArgument("version");
-        $filepath = $this->rootDir . '/version.yml';
+        $filepath = $this->getVersionFilePath();
 
         $values["parameters"]["version"]["number"] = $version;
 
         $yml = $this->dumper->dump($values);
-        file_put_contents($this->rootDir  . '/version.yml', $yml);
+        file_put_contents($filepath, $yml);
 
         $output->writeln("Bumped version: '{$version}'");
     }

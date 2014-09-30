@@ -5,24 +5,21 @@ use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Corley\VersionBundle\Command\VersionCommand;
 use org\bovigo\vfs\vfsStream;
-use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Dumper;
 
 class VersionCommandTest extends \PHPUnit_Framework_TestCase
 {
     private $kernel;
-    private $parser;
     private $dumper;
     private $root;
 
     private function prepareCommand()
     {
         $this->kernel = $this->getMock('Symfony\\Component\\HttpKernel\\KernelInterface');
-        $this->parser = new Parser();
         $this->dumper = new Dumper();
 
         $application = new Application($this->kernel);
-        $application->add(new VersionCommand($this->parser, $this->dumper));
+        $application->add(new VersionCommand($this->dumper));
 
         $this->root = vfsStream::setup('config');
 
