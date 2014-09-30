@@ -1,5 +1,7 @@
 # CorleyVersionBundle
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/692eec97-7638-4e6d-b87b-452c7d9f028f/small.png)](https://insight.sensiolabs.com/projects/692eec97-7638-4e6d-b87b-452c7d9f028f)
+
  * Master: [![Build Status](https://travis-ci.org/wdalmut/CorleyVersionBundle.svg?branch=master)](https://travis-ci.org/wdalmut/CorleyVersionBundle)
  * Develop: [![Build Status](https://travis-ci.org/wdalmut/CorleyVersionBundle.svg?branch=develop)](https://travis-ci.org/wdalmut/CorleyVersionBundle)
 
