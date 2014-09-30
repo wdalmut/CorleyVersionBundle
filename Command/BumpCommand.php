@@ -5,19 +5,16 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Dumper;
 
-class VersionCommand extends Command
+class BumpCommand extends Command
 {
-    private $parser;
     private $dumper;
     private $rootDir;
 
-    public function __construct(Parser $parser, Dumper $dumper)
+    public function __construct(Dumper $dumper)
     {
         parent::__construct(null);
-        $this->parser = $parser;
         $this->dumper = $dumper;
     }
 
@@ -26,10 +23,15 @@ class VersionCommand extends Command
         $this->rootDir = $rootDir;
     }
 
+    protected function getVersionFilePath()
+    {
+        return $this->rootDir . "/version.yml";
+    }
+
     protected function configure()
     {
         $this
-            ->setName("corley:version")
+            ->setName("corley:version:bump")
             ->setDescription("Just bump a new version")
             ->setDefinition(array(
                 new InputArgument('version', InputArgument::OPTIONAL, 'The new version label')
@@ -45,12 +47,12 @@ EOF
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $version = $input->getArgument("version");
-        $filepath = $this->rootDir . '/version.yml';
+        $filepath = $this->getVersionFilePath();
 
         $values["parameters"]["version"]["number"] = $version;
 
         $yml = $this->dumper->dump($values);
-        file_put_contents($this->rootDir  . '/version.yml', $yml);
+        file_put_contents($filepath, $yml);
 
         $output->writeln("Bumped version: '{$version}'");
     }

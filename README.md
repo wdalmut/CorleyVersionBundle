@@ -5,7 +5,32 @@
 
 Just an unified way in order to bump app version for Symfony2 application
 
+In your `AppKernel.php`
+
+```php
+public function registerBundles()
+{
+    ...
+    $bundles = array(
+        ...
+        new Corley\MaintenanceBundle\CorleyMaintenanceBundle(),
+    );
+    ...
+    return $bundles;
+}
+```
+
+And use it!
+
+```shell
+app/console corley:version:bump 0.0.1
+```
+
+The bundle creates a new `version.yml` file in your `config` folder. That's it
+no big deal...
+
 In your `config/config.yml` add an import
+
 ```yml
 imports:
     - { resource: version.yml }
@@ -51,4 +76,17 @@ $ app/console corley:version 1.0.0
 $ git commit -a -m "Bumped version 1.0.0
 $ git flow release finish 1.0.0
 ```
+
+## Install with composer
+
+In your `composer.json` add the requirement
+
+```json
+"require": {
+    "corley/version-bundle": "~1"
+}
+```
+
+Add also the repository to your composer
+
 
