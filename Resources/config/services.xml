@@ -6,7 +6,7 @@
             class="Symfony\Component\Yaml\Dumper" />
 
         <service id="corley_version.command.version_command"
-            class="Corley\VersionBundle\Command\VersionCommand">
+            class="Corley\VersionBundle\Command\BumpCommand">
             <argument type="service" id="corley_version.yml.dumper" />
             <call method="setRootDir">
                 <argument>%kernel.root_dir%/config</argument>

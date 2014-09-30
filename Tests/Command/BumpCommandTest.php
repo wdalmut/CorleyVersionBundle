@@ -3,7 +3,7 @@ namespace Corley\VersionBundle\Tests\Command;
 
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Corley\VersionBundle\Command\VersionCommand;
+use Corley\VersionBundle\Command\BumpCommand as VersionCommand;
 use org\bovigo\vfs\vfsStream;
 use Symfony\Component\Yaml\Dumper;
 

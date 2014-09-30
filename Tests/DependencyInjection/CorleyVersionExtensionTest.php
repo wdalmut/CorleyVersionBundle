@@ -26,7 +26,7 @@ class CorleyVersionExtensionTest extends \PHPUnit_Framework_TestCase
         $extension->load(array(array()), $this->container);
 
         $this->assertInstanceOf(
-            'Corley\VersionBundle\Command\VersionCommand',
+            'Corley\VersionBundle\Command\BumpCommand',
             $this->container->get('corley_version.command.version_command')
         );
     }

@@ -7,7 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Yaml\Dumper;
 
-class VersionCommand extends Command
+class BumpCommand extends Command
 {
     private $dumper;
     private $rootDir;
