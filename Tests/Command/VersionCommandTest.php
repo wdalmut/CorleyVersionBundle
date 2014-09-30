@@ -26,7 +26,7 @@ class VersionCommandTest extends \PHPUnit_Framework_TestCase
 
         $this->root = vfsStream::setup('config');
 
-        $command = $application->find('corley:version');
+        $command = $application->find('corley:version:bump');
         $command->setRootDir(vfsStream::url('config'));
 
         $commandTester = new CommandTester($command);

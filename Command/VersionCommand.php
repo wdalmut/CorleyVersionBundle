@@ -29,7 +29,7 @@ class VersionCommand extends Command
     protected function configure()
     {
         $this
-            ->setName("corley:version")
+            ->setName("corley:version:bump")
             ->setDescription("Just bump a new version")
             ->setDefinition(array(
                 new InputArgument('version', InputArgument::OPTIONAL, 'The new version label')
