@@ -28,7 +28,13 @@ And use it!
 app/console corley:version:bump 0.0.1
 ```
 
-The bundle creates/updates a new `version.yml` file in your `config` folder. That's it
+And see the actual version
+
+```shell
+app/console corley:version:show
+```
+
+The bundle creates/updates a `version.yml` file in your `config` folder. That's it
 no big deal...
 
 In your `config/config.yml` add an import

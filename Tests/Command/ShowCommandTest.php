@@ -3,9 +3,9 @@ namespace Corley\VersionBundle\Tests\Command;
 
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Corley\VersionBundle\Command\ShowCommand as VersionCommand;
 use org\bovigo\vfs\vfsStream;
 use Symfony\Component\Yaml\Parser;
+use Corley\VersionBundle\Command\ShowCommand;
 
 class ShowCommandTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,7 +24,7 @@ class ShowCommandTest extends \PHPUnit_Framework_TestCase
         $this->parser = new parser();
 
         $application = new Application($this->kernel);
-        $application->add(new VersionCommand($this->parser));
+        $application->add(new ShowCommand($this->parser));
 
         $command = $application->find('corley:version:show');
         $command->setRootDir(vfsStream::url('config'));
@@ -38,14 +38,23 @@ class ShowCommandTest extends \PHPUnit_Framework_TestCase
      * @group functional
      * @group command
      */
-    public function testBumpANewVersion()
+    public function testShowANewVersion()
     {
         file_put_contents(vfsStream::url('config/version.yml'),'{ parameters: { version: { number: 1.2.3 } } }');
 
         $commandTester = $this->prepareCommand();
 
-        $commandTester->execute(array());
+        $commandTester->execute(array(null));
 
         $this->assertRegExp('/\'1.2.3\'/', $commandTester->getDisplay());
+    }
+
+    public function testShowVersionWithoutAnyPreviuousRelease()
+    {
+        $commandTester = $this->prepareCommand();
+
+        $commandTester->execute(array(null));
+
+        $this->assertRegExp('/There are no releases/', $commandTester->getDisplay());
     }
 }

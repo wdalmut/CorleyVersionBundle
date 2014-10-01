@@ -32,6 +32,7 @@ class ShowCommand extends Command
     {
         $this
             ->setName("corley:version:show")
+            ->setDefinition(array())
             ->setDescription("Show the actual version")
             ->setHelp(<<<EOF
 Just show the actual app version
@@ -44,10 +45,15 @@ EOF
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $filepath = $this->getVersionFilePath();
-        $yml = $this->parser->parse(file_get_contents($filepath));
+        if (file_exists($filepath)) {
+            $yml = $this->parser->parse(file_get_contents($filepath));
 
-        $versionNumber = $yml["parameters"]["version"]["number"];
+            $versionNumber = $yml["parameters"]["version"]["number"];
 
-        $output->writeln("The actual version is: <info>'{$versionNumber}'</info>");
+            $output->writeln("The actual version is: '<info>{$versionNumber}</info>'");
+        } else {
+            $output->writeln("<warn>There are no releases.<warn>");
+            $output->writeln("You can create a new release with: app/console corley:version:bump <version>");
+        }
     }
 }
