@@ -48,4 +48,13 @@ class ShowCommandTest extends \PHPUnit_Framework_TestCase
 
         $this->assertRegExp('/\'1.2.3\'/', $commandTester->getDisplay());
     }
+
+    public function testShowVersionWithoutAnyPreviuousRelease()
+    {
+        $commandTester = $this->prepareCommand();
+
+        $commandTester->execute(array(null));
+
+        $this->assertRegExp('/There are no releases/', $commandTester->getDisplay());
+    }
 }

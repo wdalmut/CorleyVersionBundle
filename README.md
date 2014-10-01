@@ -28,7 +28,7 @@ And use it!
 app/console corley:version:bump 0.0.1
 ```
 
-Or see the actual version
+And see the actual version
 
 ```shell
 app/console corley:version:show
