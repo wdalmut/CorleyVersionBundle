@@ -1,9 +1,11 @@
 # CorleyVersionBundle
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/692eec97-7638-4e6d-b87b-452c7d9f028f/small.png)](https://insight.sensiolabs.com/projects/692eec97-7638-4e6d-b87b-452c7d9f028f)
+
  * Master: [![Build Status](https://travis-ci.org/wdalmut/CorleyVersionBundle.svg?branch=master)](https://travis-ci.org/wdalmut/CorleyVersionBundle)
  * Develop: [![Build Status](https://travis-ci.org/wdalmut/CorleyVersionBundle.svg?branch=develop)](https://travis-ci.org/wdalmut/CorleyVersionBundle)
 
-Just an unified way in order to bump app version for Symfony2 application
+Just an unified way in order to bump app version for Symfony2 applications
 
 In your `AppKernel.php`
 
@@ -13,7 +15,7 @@ public function registerBundles()
     ...
     $bundles = array(
         ...
-        new Corley\MaintenanceBundle\CorleyMaintenanceBundle(),
+        new Corley\VersionBundle\CorleyVersionBundle(),
     );
     ...
     return $bundles;
@@ -26,7 +28,7 @@ And use it!
 app/console corley:version:bump 0.0.1
 ```
 
-The bundle creates a new `version.yml` file in your `config` folder. That's it
+The bundle creates/updates a new `version.yml` file in your `config` folder. That's it
 no big deal...
 
 In your `config/config.yml` add an import
@@ -72,7 +74,7 @@ Or you can use it in your git flow release process
 
 ```shell
 $ git flow release start 1.0.0
-$ app/console corley:version 1.0.0
+$ app/console corley:version:bump 1.0.0
 $ git commit -a -m "Bumped version 1.0.0
 $ git flow release finish 1.0.0
 ```
