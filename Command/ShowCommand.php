@@ -32,6 +32,7 @@ class ShowCommand extends Command
     {
         $this
             ->setName("corley:version:show")
+            ->setDefinition(array())
             ->setDescription("Show the actual version")
             ->setHelp(<<<EOF
 Just show the actual app version
