@@ -48,6 +48,6 @@ EOF
 
         $versionNumber = $yml["parameters"]["version"]["number"];
 
-        $output->writeln("The actual version is: <info>'{$versionNumber}'</info>");
+        $output->writeln("The actual version is: '<info>{$versionNumber}</info>'");
     }
 }
