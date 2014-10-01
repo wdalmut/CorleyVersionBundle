@@ -20,7 +20,7 @@ class CorleyVersionExtensionTest extends \PHPUnit_Framework_TestCase
         $this->container->set('kernel', $this->kernel);
     }
 
-    public function testSymlinkAndCopyModes()
+    public function testBumpCommandCorrectlyConfigured()
     {
         $extension = new CorleyVersionExtension();
         $extension->load(array(array()), $this->container);
@@ -28,6 +28,17 @@ class CorleyVersionExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(
             'Corley\VersionBundle\Command\BumpCommand',
             $this->container->get('corley_version.command.version_command')
+        );
+    }
+
+    public function testShowCommandCorrectlyConfigured()
+    {
+        $extension = new CorleyVersionExtension();
+        $extension->load(array(array()), $this->container);
+
+        $this->assertInstanceOf(
+            'Corley\VersionBundle\Command\ShowCommand',
+            $this->container->get('corley_version.command.show_version_command')
         );
     }
 }

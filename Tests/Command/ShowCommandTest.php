@@ -3,14 +3,14 @@ namespace Corley\VersionBundle\Tests\Command;
 
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Corley\VersionBundle\Command\BumpCommand as VersionCommand;
+use Corley\VersionBundle\Command\ShowCommand as VersionCommand;
 use org\bovigo\vfs\vfsStream;
-use Symfony\Component\Yaml\Dumper;
+use Symfony\Component\Yaml\Parser;
 
-class BumpCommandTest extends \PHPUnit_Framework_TestCase
+class ShowCommandTest extends \PHPUnit_Framework_TestCase
 {
     private $kernel;
-    private $dumper;
+    private $parser;
     private $root;
 
     public function setUp()
@@ -21,12 +21,12 @@ class BumpCommandTest extends \PHPUnit_Framework_TestCase
     private function prepareCommand()
     {
         $this->kernel = $this->getMock('Symfony\\Component\\HttpKernel\\KernelInterface');
-        $this->dumper = new Dumper();
+        $this->parser = new parser();
 
         $application = new Application($this->kernel);
-        $application->add(new VersionCommand($this->dumper));
+        $application->add(new VersionCommand($this->parser));
 
-        $command = $application->find('corley:version:bump');
+        $command = $application->find('corley:version:show');
         $command->setRootDir(vfsStream::url('config'));
 
         $commandTester = new CommandTester($command);
@@ -40,11 +40,12 @@ class BumpCommandTest extends \PHPUnit_Framework_TestCase
      */
     public function testBumpANewVersion()
     {
+        file_put_contents(vfsStream::url('config/version.yml'),'{ parameters: { version: { number: 1.2.3 } } }');
+
         $commandTester = $this->prepareCommand();
 
-        $commandTester->execute(array("version" => "x.x.x"));
+        $commandTester->execute(array());
 
-        $this->assertEquals('{ parameters: { version: { number: x.x.x } } }', file_get_contents(vfsStream::url('config/version.yml')));
-        $this->assertRegExp('/Bumped version: \'x.x.x\'/', $commandTester->getDisplay());
+        $this->assertRegExp('/\'1.2.3\'/', $commandTester->getDisplay());
     }
 }

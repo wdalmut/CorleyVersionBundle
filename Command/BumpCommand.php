@@ -39,7 +39,7 @@ class BumpCommand extends Command
             ->setHelp(<<<EOF
 Just update the version configuration file
 
-    <info>php app/console corley:version x.x.x</info>
+    <info>php app/console corley:version:bump x.x.x</info>
 EOF
         );
     }
