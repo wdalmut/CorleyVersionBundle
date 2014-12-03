@@ -81,7 +81,7 @@ Or you can use it in your git flow release process
 ```shell
 $ git flow release start 1.0.0
 $ app/console corley:version:bump 1.0.0
-$ git commit -a -m "Bumped version 1.0.0
+$ git commit -a -m "Bumped version 1.0.0"
 $ git flow release finish 1.0.0
 ```
 
